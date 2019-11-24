@@ -3,11 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "dev": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:prod": "ng build --prod",
+    "start:prod": "npm run build:prod && npm run server",
+    "heroku-postbuild": "npm run build:prod",
+    "start": "node ./server.js"
   },
   "private": true,
   "dependencies": {
