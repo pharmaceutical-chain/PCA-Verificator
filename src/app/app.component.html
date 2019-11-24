@@ -17,7 +17,8 @@
         d="m46 47h-32c-.552 0-1-.448-1-1v-32c0-.552.448-1 1-1h32c.552 0 1 .448 1 1v32c0 .552-.448 1-1 1zm-31-2h30v-30h-30z" />
       <path d="m59 31h-58c-.552 0-1-.448-1-1s.448-1 1-1h58c.552 0 1 .448 1 1s-.448 1-1 1z" /></svg>
   </label>
-  <input id="access-camera" type="file" accept="image/*" capture="camera" style="visibility: hidden; position: absolute;" />
+  <input id="access-camera" type="file" accept="image/*" capture="camera"
+    style="visibility: hidden; position: absolute;" />
 </div>
 
 <!-- Content -->
@@ -33,51 +34,50 @@
           fill="green" />
       </g>
     </svg>
-    <span class="verificator-name">I'm Verificator! Looking your pharmaceutical supply chain</span>
+    <span>I'm Verificator! Looking your pharmaceutical supply chain</span>
     <img class="verificator-logo" alt="Verificator Logo" src="./../assets/logo-white.png" />
   </div>
 
   <!-- Specification -->
   <div class="batch-specification">
     <h2>Batch Specification</h2>
-    <p><a href="https://ropsten.etherscan.io/address/0x37aa343f291425cda22e8d8591f7fd5778428e78#code"
-        target="_blank">0x37aa343f291425cda22e8d8591f7fd5778428e78</a></p>
+    <p><a (click)="onClickContracAddress(data.value.batchCA)">{{data.value.batchCA}}</a></p>
 
     <div class="spec-container">
       <div class="spec-col">
         <div class="spec-row">
           <span class="spec-key">Medicine</span>
-          <span class="spec-value">Thuốc trị đau đầu không tác dụng phụ cho trẻ</span>
+          <span class="spec-value">{{data.value.medicine}}</span>
         </div>
         <div class="spec-row">
           <span class="spec-key">Batch No.</span>
-          <span class="spec-value">0109201901092022</span>
+          <span class="spec-value">{{data.value.batchNumber}}</span>
         </div>
         <div class="spec-row">
           <span class="spec-key">MFG date</span>
-          <span class="spec-value">01/09/2019</span>
+          <span class="spec-value">{{data.value.mfg}}</span>
         </div>
         <div class="spec-row">
           <span class="spec-key">EXP date</span>
-          <span class="spec-value">01/09/2022</span>
+          <span class="spec-value">{{data.value.exp}}</span>
         </div>
       </div>
       <div class="spec-col">
         <div class="spec-row">
           <span class="spec-key">Classification</span>
-          <span class="spec-value">Prescription medicine</span>
+          <span class="spec-value">{{data.value.classification}}</span>
         </div>
         <div class="spec-row">
           <span class="spec-key">Delared price</span>
-          <span class="spec-value">1000 vnd/viên</span>
+          <span class="spec-value">{{data.value.price}} vnd / {{data.value.unit}}</span>
         </div>
         <div class="spec-row">
           <span class="spec-key">Made in</span>
-          <span class="spec-value">Việt Nam</span>
+          <span class="spec-value">{{data.value.madeIn}}</span>
         </div>
         <div class="spec-row">
           <span class="spec-key">Made by</span>
-          <span class="spec-value">Công ty sản xuất dược Bình Định</span>
+          <span class="spec-value">{{data.value.madeBy}}</span>
         </div>
       </div>
     </div>
@@ -87,100 +87,106 @@
   <div class="batch-progress">
     <h2>Batch Progress</h2>
     <div class="spec-container">
-      <div class="spec-col">
-        <h3>Manufacturer</h3>
-        <div class="spec-row spec-row-normal">
-          <i class="material-icons">
-            person
-          </i>
-          <span>Công ty sản xuất dược Bình Định</span>
-        </div>
-        <div class="spec-row spec-row-contract">
-          <i class="material-icons">
-            receipt
-          </i>
-          <span><a>0x37aa343f291425cda22e8d8591f7fd5778428e78</a></span>
-        </div>
-        <div class="spec-row spec-row-normal">
-          <i class="material-icons">
-            phone
-          </i>
-          <span>0328372204</span>
-        </div>
+      <div *ngFor="let item of data.value.supplyChain; let i=index" class="container-for" style="display: contents;">
+        <div *ngIf="i % 2 === 0; then leftSide else rightSide" class="container-if" style="display: contents;"></div>
+        <ng-template #leftSide>
+          <div class="spec-col">
+            <h3>{{item.type}}</h3>
+            <div class="spec-row spec-row-normal">
+              <i class="material-icons">
+                person
+              </i>
+              <span>{{item.tenantName}}</span>
+            </div>
+            <div class="spec-row spec-row-contract">
+              <i class="material-icons">
+                receipt
+              </i>
+              <span><a (click)="onClickContracAddress(item.tenantCA)">{{item.tenantCA}}</a></span>
+            </div>
+            <div class="spec-row spec-row-normal">
+              <i class="material-icons">
+                phone
+              </i>
+              <span>{{item.tenantPhone}}</span>
+            </div>
 
-        <div style="width: 50%;">
-          <hr style="opacity: 0.3;">
-        </div>
+            <div style="width: 50%;">
+              <hr style="opacity: 0.3;">
+            </div>
 
-        <div class="spec-row spec-row-time">
-          <i class="material-icons">
-            access_time
-          </i>
-          <span>01/09/2019 16:08:02</span>
-        </div>
-        <div class="spec-row spec-row-contract">
-          <i class="material-icons">
-            receipt
-          </i>
-          <span><a>0x37aa343f291425cda22e8d8591f7fd5778428e78</a></span>
-        </div>
-        <div class="spec-row spec-row-quantity spec-row-normal">
-          <i><img src="./../assets/drug.png" alt="quantity icon"></i>
-          <span>10.000 / viên</span>
-        </div>
+            <div class="spec-row spec-row-time">
+              <i class="material-icons">
+                access_time
+              </i>
+              <span>{{item.transferTime}}</span>
+            </div>
+            <div class="spec-row spec-row-contract">
+              <i class="material-icons">
+                receipt
+              </i>
+              <span><a (click)="onClickContracAddress(item.transferCA)">{{item.transferCA}}</a></span>
+            </div>
+            <div class="spec-row spec-row-quantity spec-row-normal">
+              <i><img src="./../assets/drug.png" alt="quantity icon"></i>
+              <span>{{item.transferQuantity}} / {{item.transferUnit}}</span>
+            </div>
 
-        <div class="line-right">
-          <i class="material-icons"> check_circle </i>
-        </div>
-      </div>
-      <div class="spec-col hidden"></div>
+            <div class="line-right">
+              <i class="material-icons"> check_circle </i>
+            </div>
+          </div>
+          <div class="spec-col hidden"></div>
+        </ng-template>
+        <ng-template #rightSide>
+          <div class="spec-col hidden"></div>
+          <div class="spec-col">
+            <h3>{{item.type}}</h3>
+            <div class="spec-row spec-row-normal">
+              <i class="material-icons">
+                person
+              </i>
+              <span>{{item.tenantName}}</span>
+            </div>
+            <div class="spec-row spec-row-contract">
+              <i class="material-icons">
+                receipt
+              </i>
+              <span><a (click)="onClickContracAddress(item.tenantCA)">{{item.tenantCA}}</a></span>
+            </div>
+            <div class="spec-row spec-row-normal">
+              <i class="material-icons">
+                phone
+              </i>
+              <span>{{item.tenantPhone}}</span>
+            </div>
 
-      <div class="spec-col hidden"></div>
-      <div class="spec-col">
-        <h3>Manufacturer</h3>
-        <div class="spec-row spec-row-normal">
-          <i class="material-icons">
-            person
-          </i>
-          <span>Công ty sản xuất dược Bình Định</span>
-        </div>
-        <div class="spec-row spec-row-contract">
-          <i class="material-icons">
-            receipt
-          </i>
-          <span><a>0x37aa343f291425cda22e8d8591f7fd5778428e78</a></span>
-        </div>
-        <div class="spec-row spec-row-normal">
-          <i class="material-icons">
-            phone
-          </i>
-          <span>0328372204</span>
-        </div>
+            <div style="width: 50%;">
+              <hr style="opacity: 0.3;">
+            </div>
 
-        <div style="width: 50%;">
-          <hr style="opacity: 0.3;">
-        </div>
+            <div class="spec-row spec-row-time">
+              <i class="material-icons">
+                access_time
+              </i>
+              <span>{{item.transferTime}}</span>
+            </div>
+            <div class="spec-row spec-row-contract">
+              <i class="material-icons">
+                receipt
+              </i>
+              <span><a (click)="onClickContracAddress(item.transferCA)">{{item.transferCA}}</a></span>
+            </div>
+            <div class="spec-row spec-row-quantity spec-row-normal">
+              <i><img src="./../assets/drug.png" alt="quantity icon"></i>
+              <span>{{item.transferQuantity}} / {{item.transferUnit}}</span>
+            </div>
 
-        <div class="spec-row spec-row-time">
-          <i class="material-icons">
-            access_time
-          </i>
-          <span>01/09/2019 16:08:02</span>
-        </div>
-        <div class="spec-row spec-row-contract">
-          <i class="material-icons">
-            receipt
-          </i>
-          <span><a>0x37aa343f291425cda22e8d8591f7fd5778428e78</a></span>
-        </div>
-        <div class="spec-row spec-row-quantity spec-row-normal">
-          <i><img src="./../assets/drug.png" alt="quantity icon"></i>
-          <span>10.000 / viên</span>
-        </div>
-
-        <div class="line-left">
-          <i class="material-icons"> check_circle </i>
-        </div>
+            <div class="line-left">
+              <i class="material-icons"> check_circle </i>
+            </div>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

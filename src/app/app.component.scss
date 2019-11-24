@@ -109,14 +109,6 @@ svg.material-icons:not(:last-child) {
       box-shadow: 0 4px 17px rgba(black, 0.35);
     }
 
-    &:last-child {
-
-      .line-left,
-      .line-right {
-        height: 100%;
-      }
-    }
-
     .spec-row {
       display: flex;
 
@@ -161,6 +153,16 @@ svg.material-icons:not(:last-child) {
     color: green;
     background-color: white;
     border-radius: 50%;
+  }
+
+  .container-for {
+    &:last-child {
+
+      .line-left,
+      .line-right {
+        height: 100%;
+      }
+    }
   }
 }
 
@@ -358,8 +360,12 @@ svg#clouds {
     visibility: hidden;
   }
 
-  .verificator-name {
-    width: 185px;
+  .card {
+    margin: 0 0 16px 8px;
+  }
+
+  .card.highlight-card {
+    width: 250px;
   }
 
   .batch-specification {
@@ -388,9 +394,11 @@ svg#clouds {
     }
 
     .spec-container {
+      margin: 0;
+      
       .spec-col {
         width: 100%;
-        margin: 0;
+        margin: 8px 0;
         padding: 0 16px;
 
         .spec-row {
@@ -414,7 +422,9 @@ svg#clouds {
       }
 
       .hidden {
-        padding: 4px;
+        padding: 0;
+        border: none;
+        margin: 0;
       }
     }
   }
