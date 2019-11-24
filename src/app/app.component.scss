@@ -1,0 +1,423 @@
+:host {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 8px 0;
+}
+
+p {
+  margin: 0;
+}
+
+.logo {
+  width: 140px;
+  top: 3px;
+  position: relative;
+}
+
+.qrcode-scan {
+  margin: 0 16px;
+  fill: rgba(255, 255, 255, 0.6);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.toolbar {
+  height: 60px;
+  margin: -8px;
+  display: flex;
+  align-items: center;
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+.content {
+  display: flex;
+  margin: 32px auto;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
+
+  p a,
+  span a {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+svg.material-icons {
+  height: 24px;
+  width: auto;
+}
+
+svg.material-icons:not(:last-child) {
+  margin-right: 8px;
+}
+
+.card svg.material-icons path {
+  fill: #888888;
+}
+
+.batch-specification,
+.batch-progress {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.spec-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
+
+  .spec-col {
+    border-radius: 4px;
+    border: 1px solid #eee;
+    background-color: #fafafa;
+    width: 400px;
+    margin: 0 8px 16px;
+    padding: 16px;
+    line-height: 24px;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 17px rgba(black, 0.35);
+    }
+
+    &:last-child {
+
+      .line-left,
+      .line-right {
+        height: 100%;
+      }
+    }
+
+    .spec-row {
+      display: flex;
+
+      .spec-key {
+        flex: 30%;
+      }
+
+      .spec-value {
+        flex: 70%;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  .line-right {
+    position: absolute;
+    top: 0;
+    right: -19px;
+    width: 4px;
+    height: 110%;
+    background-color: #1976d2;
+  }
+
+  .line-left {
+    position: absolute;
+    top: 0;
+    left: -19px;
+    width: 4px;
+    height: 110%;
+    background-color: #1976d2;
+  }
+
+  .line-left i,
+  .line-right i {
+    left: -10px;
+    top: 16px;
+    position: absolute;
+    color: green;
+    background-color: white;
+    border-radius: 50%;
+  }
+}
+
+.batch-progress {
+  .spec-col {
+    margin: 0 16px 16px;
+    line-height: 32px;
+
+    .spec-row {
+      i {
+        flex: 10%;
+      }
+
+      span {
+        flex: 90%;
+      }
+    }
+
+    .spec-row-normal {
+      span {
+        opacity: 0.8;
+      }
+
+      i {
+        color: #888888;
+      }
+    }
+
+    .spec-row-quantity {
+      img {
+        height: 24px;
+      }
+    }
+
+    .spec-row-contract {
+      color: #1976d2;
+    }
+
+    .spec-row-time {
+      color: green;
+    }
+  }
+}
+
+.card {
+  border-radius: 4px;
+  border: 1px solid #eee;
+  background-color: #fafafa;
+  height: 40px;
+  width: 200px;
+  margin: 0 8px 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  line-height: 24px;
+}
+
+.card.card-small {
+  height: 16px;
+  width: 168px;
+}
+
+.card.highlight-card {
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+  border: none;
+  width: auto;
+  min-width: 30%;
+  position: relative;
+}
+
+.card.card.highlight-card span {
+  margin-left: 60px;
+}
+
+svg#rocket {
+  width: 80px;
+  position: absolute;
+  left: -10px;
+  top: -24px;
+}
+
+.verificator-logo {
+  width: 60px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+a,
+a:visited,
+a:hover {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #125699;
+  cursor: pointer;
+}
+
+.report-zone {
+  background-color: rgb(15, 15, 16);
+  position: relative;
+  width: 100%;
+  margin-top: 16px;
+
+  .report-header {
+    background-color: rgb(58, 58, 58);
+    display: flex;
+    color: yellow;
+    align-items: center;
+    padding: 0 16px;
+
+    h2 {
+      margin-left: 8px;
+    }
+
+    .button {
+      &:hover {
+        color: #bbbb05;
+        transform: translateX(3px);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .report-content {
+    width: 100%;
+    padding: 8px;
+    text-align: center;
+
+    textarea {
+      width: 90%;
+      border: none;
+      background-color: rgb(15, 15, 16);
+      color: #eee;
+      font-size: 13px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+  }
+}
+
+footer {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  line-height: 20px;
+}
+
+footer a {
+  display: flex;
+  align-items: center;
+}
+
+svg#clouds {
+  position: fixed;
+  bottom: -160px;
+  left: -230px;
+  z-index: -10;
+  width: 1920px;
+}
+
+
+/* Responsive Styles */
+@media screen and (max-width: 767px) {
+
+  .card-container>*:not(.circle-link),
+  .terminal {
+    width: 100%;
+  }
+
+  .card:not(.highlight-card) {
+    height: 16px;
+    margin: 8px 0;
+  }
+
+  .card.highlight-card span {
+    margin-left: 72px;
+  }
+
+  svg#rocket-smoke {
+    right: 120px;
+    transform: rotate(-5deg);
+  }
+}
+
+@media screen and (max-width: 575px) {
+  svg#rocket-smoke {
+    display: none;
+    visibility: hidden;
+  }
+
+  .verificator-name {
+    width: 185px;
+  }
+
+  .batch-specification {
+    p a {
+      width: 250px;
+    }
+
+    .spec-container {
+      .spec-col {
+        width: 100%;
+        margin: 0;
+        padding: 0 16px;
+        border: none;
+
+        .spec-key {
+          hyphens: auto;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  .batch-progress {
+    span a {
+      width: 200px;
+    }
+
+    .spec-container {
+      .spec-col {
+        width: 100%;
+        margin: 0;
+        padding: 0 16px;
+
+        .spec-row {
+          i {
+            flex: 15%;
+          }
+
+          span {
+            flex: 85%;
+          }
+        }
+
+        .line-right,
+        .line-left {
+          left: -4px;
+
+          i {
+            top: 10px;
+          }
+        }
+      }
+
+      .hidden {
+        padding: 4px;
+      }
+    }
+  }
+
+
+}

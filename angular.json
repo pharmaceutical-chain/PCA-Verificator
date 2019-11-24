@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles-app-loading.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -93,6 +94,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles-app-loading.scss",
               "src/styles.scss"
             ],
             "scripts": []
