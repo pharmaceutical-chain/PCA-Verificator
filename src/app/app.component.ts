@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     const activeRoute = window.location.href;
-    const segments = activeRoute.split('/');
+    const segments = activeRoute.split('/').filter(s => s !== '' && s.length === 36);
     const batchId = segments[segments.length - 1];
     this.service.getSupplyChain(batchId).subscribe(res => {
       this.data.next(res);
