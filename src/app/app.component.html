@@ -26,173 +26,188 @@
 
   <!-- Highlight Card -->
   <div class="card highlight-card card-small">
-
     <svg id="rocket" alt="Rocket Ship" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678"
       viewBox="0 0 101.678 101.678">
       <g id="Group_83" data-name="Group 83" transform="translate(-141 -696)">
         <circle id="Ellipse_8" data-name="Ellipse 8" cx="50.839" cy="50.839" r="50.839" transform="translate(141 696)"
-          fill="green" />
+          [ngStyle]="{'fill': (isVerifing | async) ? '#475561' : 'green'}" />
       </g>
     </svg>
-    <span>I'm Verificator! Looking your pharmaceutical supply chain</span>
-    <img class="verificator-logo" alt="Verificator Logo" src="./../assets/logo-white.png" />
+
+    <div *ngIf="!(isVerifing | async)" style="display: contents;">
+      <span>I'm Verificator! </span>
+      <img class="verificator-logo" alt="Verificator Logo" src="./../assets/logo-white.png" />
+    </div>
+
+    <div *ngIf="isVerifing | async" style="display: contents;">
+      <span>Verifing Pharmaceutical Supply Chain</span>
+      <img class="verificator-logo" alt="Verificator Logo" src="./../assets/search.svg" />
+    </div>
   </div>
 
-  <!-- Specification -->
-  <div class="batch-specification">
-    <h2>Batch Specification</h2>
-    <p><a (click)="onClickContracAddress(data.value.batchCA)">{{data.value.batchCA}}</a></p>
+  <!-- Suppy Chain -->
+  <div *ngIf="!(isVerifing | async)" style="display: contents;">
+    <!-- Specification -->
+    <div class="batch-specification">
+      <h2>Batch Specification</h2>
+      <p><a (click)="onClickContracAddress(data.value.batchCA)">{{data.value.batchCA}}</a></p>
 
-    <div class="spec-container">
-      <div class="spec-col">
-        <div class="spec-row">
-          <span class="spec-key">Medicine</span>
-          <span class="spec-value">{{data.value.medicine}}</span>
+      <div class="spec-container">
+        <div class="spec-col">
+          <div class="spec-row">
+            <span class="spec-key">Medicine</span>
+            <span class="spec-value">{{data.value.medicine}}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Batch No.</span>
+            <span class="spec-value">{{data.value.batchNumber}}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">MFG date</span>
+            <span class="spec-value">{{data.value.mfg}}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">EXP date</span>
+            <span class="spec-value">{{data.value.exp}}</span>
+          </div>
         </div>
-        <div class="spec-row">
-          <span class="spec-key">Batch No.</span>
-          <span class="spec-value">{{data.value.batchNumber}}</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">MFG date</span>
-          <span class="spec-value">{{data.value.mfg}}</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">EXP date</span>
-          <span class="spec-value">{{data.value.exp}}</span>
+        <div class="spec-col">
+          <div class="spec-row">
+            <span class="spec-key">Classification</span>
+            <span class="spec-value">{{data.value.classification}}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Delared price</span>
+            <span class="spec-value">{{data.value.price}} vnd / {{data.value.unit}}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Made in</span>
+            <span class="spec-value">{{data.value.madeIn}}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Made by</span>
+            <span class="spec-value">{{data.value.madeBy}}</span>
+          </div>
         </div>
       </div>
-      <div class="spec-col">
-        <div class="spec-row">
-          <span class="spec-key">Classification</span>
-          <span class="spec-value">{{data.value.classification}}</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Delared price</span>
-          <span class="spec-value">{{data.value.price}} vnd / {{data.value.unit}}</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Made in</span>
-          <span class="spec-value">{{data.value.madeIn}}</span>
-        </div>
-        <div class="spec-row">
-          <span class="spec-key">Made by</span>
-          <span class="spec-value">{{data.value.madeBy}}</span>
+    </div>
+
+    <!-- Progress -->
+    <div class="batch-progress">
+      <h2>Batch Progress</h2>
+      <div class="spec-container">
+        <div *ngFor="let item of data.value.supplyChain; let i=index" class="container-for" style="display: contents;">
+          <div *ngIf="i % 2 === 0; then leftSide else rightSide" class="container-if" style="display: contents;"></div>
+          <ng-template #leftSide>
+            <div class="spec-col">
+              <h3>{{item.type}}</h3>
+              <div class="spec-row spec-row-normal">
+                <i class="material-icons">
+                  person
+                </i>
+                <span>{{item.tenantName}}</span>
+              </div>
+              <div class="spec-row spec-row-contract">
+                <i class="material-icons">
+                  receipt
+                </i>
+                <span><a (click)="onClickContracAddress(item.tenantCA)">{{item.tenantCA}}</a></span>
+              </div>
+              <div class="spec-row spec-row-normal">
+                <i class="material-icons">
+                  phone
+                </i>
+                <span>{{item.tenantPhone}}</span>
+              </div>
+
+              <div style="width: 50%;">
+                <hr style="opacity: 0.3;">
+              </div>
+
+              <div class="spec-row spec-row-time">
+                <i class="material-icons">
+                  access_time
+                </i>
+                <span>{{item.transferTime}}</span>
+              </div>
+              <div class="spec-row spec-row-contract">
+                <i class="material-icons">
+                  receipt
+                </i>
+                <span><a (click)="onClickContracAddress(item.transferCA)">{{item.transferCA}}</a></span>
+              </div>
+              <div class="spec-row spec-row-quantity spec-row-normal">
+                <i><img src="./../assets/drug.png" alt="quantity icon"></i>
+                <span>{{item.transferQuantity}} / {{item.transferUnit}}</span>
+              </div>
+
+              <div class="line-right">
+                <i class="material-icons"> check_circle </i>
+              </div>
+            </div>
+            <div class="spec-col hidden"></div>
+          </ng-template>
+          <ng-template #rightSide>
+            <div class="spec-col hidden"></div>
+            <div class="spec-col">
+              <h3>{{item.type}}</h3>
+              <div class="spec-row spec-row-normal">
+                <i class="material-icons">
+                  person
+                </i>
+                <span>{{item.tenantName}}</span>
+              </div>
+              <div class="spec-row spec-row-contract">
+                <i class="material-icons">
+                  receipt
+                </i>
+                <span><a (click)="onClickContracAddress(item.tenantCA)">{{item.tenantCA}}</a></span>
+              </div>
+              <div class="spec-row spec-row-normal">
+                <i class="material-icons">
+                  phone
+                </i>
+                <span>{{item.tenantPhone}}</span>
+              </div>
+
+              <div style="width: 50%;">
+                <hr style="opacity: 0.3;">
+              </div>
+
+              <div class="spec-row spec-row-time">
+                <i class="material-icons">
+                  access_time
+                </i>
+                <span>{{item.transferTime}}</span>
+              </div>
+              <div class="spec-row spec-row-contract">
+                <i class="material-icons">
+                  receipt
+                </i>
+                <span><a (click)="onClickContracAddress(item.transferCA)">{{item.transferCA}}</a></span>
+              </div>
+              <div class="spec-row spec-row-quantity spec-row-normal">
+                <i><img src="./../assets/drug.png" alt="quantity icon"></i>
+                <span>{{item.transferQuantity}} / {{item.transferUnit}}</span>
+              </div>
+
+              <div class="line-left">
+                <i class="material-icons"> check_circle </i>
+              </div>
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Progress -->
-  <div class="batch-progress">
-    <h2>Batch Progress</h2>
-    <div class="spec-container">
-      <div *ngFor="let item of data.value.supplyChain; let i=index" class="container-for" style="display: contents;">
-        <div *ngIf="i % 2 === 0; then leftSide else rightSide" class="container-if" style="display: contents;"></div>
-        <ng-template #leftSide>
-          <div class="spec-col">
-            <h3>{{item.type}}</h3>
-            <div class="spec-row spec-row-normal">
-              <i class="material-icons">
-                person
-              </i>
-              <span>{{item.tenantName}}</span>
-            </div>
-            <div class="spec-row spec-row-contract">
-              <i class="material-icons">
-                receipt
-              </i>
-              <span><a (click)="onClickContracAddress(item.tenantCA)">{{item.tenantCA}}</a></span>
-            </div>
-            <div class="spec-row spec-row-normal">
-              <i class="material-icons">
-                phone
-              </i>
-              <span>{{item.tenantPhone}}</span>
-            </div>
+  <!-- NOT FOUND 404 -->
+  <div>
 
-            <div style="width: 50%;">
-              <hr style="opacity: 0.3;">
-            </div>
-
-            <div class="spec-row spec-row-time">
-              <i class="material-icons">
-                access_time
-              </i>
-              <span>{{item.transferTime}}</span>
-            </div>
-            <div class="spec-row spec-row-contract">
-              <i class="material-icons">
-                receipt
-              </i>
-              <span><a (click)="onClickContracAddress(item.transferCA)">{{item.transferCA}}</a></span>
-            </div>
-            <div class="spec-row spec-row-quantity spec-row-normal">
-              <i><img src="./../assets/drug.png" alt="quantity icon"></i>
-              <span>{{item.transferQuantity}} / {{item.transferUnit}}</span>
-            </div>
-
-            <div class="line-right">
-              <i class="material-icons"> check_circle </i>
-            </div>
-          </div>
-          <div class="spec-col hidden"></div>
-        </ng-template>
-        <ng-template #rightSide>
-          <div class="spec-col hidden"></div>
-          <div class="spec-col">
-            <h3>{{item.type}}</h3>
-            <div class="spec-row spec-row-normal">
-              <i class="material-icons">
-                person
-              </i>
-              <span>{{item.tenantName}}</span>
-            </div>
-            <div class="spec-row spec-row-contract">
-              <i class="material-icons">
-                receipt
-              </i>
-              <span><a (click)="onClickContracAddress(item.tenantCA)">{{item.tenantCA}}</a></span>
-            </div>
-            <div class="spec-row spec-row-normal">
-              <i class="material-icons">
-                phone
-              </i>
-              <span>{{item.tenantPhone}}</span>
-            </div>
-
-            <div style="width: 50%;">
-              <hr style="opacity: 0.3;">
-            </div>
-
-            <div class="spec-row spec-row-time">
-              <i class="material-icons">
-                access_time
-              </i>
-              <span>{{item.transferTime}}</span>
-            </div>
-            <div class="spec-row spec-row-contract">
-              <i class="material-icons">
-                receipt
-              </i>
-              <span><a (click)="onClickContracAddress(item.transferCA)">{{item.transferCA}}</a></span>
-            </div>
-            <div class="spec-row spec-row-quantity spec-row-normal">
-              <i><img src="./../assets/drug.png" alt="quantity icon"></i>
-              <span>{{item.transferQuantity}} / {{item.transferUnit}}</span>
-            </div>
-
-            <div class="line-left">
-              <i class="material-icons"> check_circle </i>
-            </div>
-          </div>
-        </ng-template>
-      </div>
-    </div>
   </div>
 
   <!-- Report -->
-  <div class="report-zone">
+  <div [ngStyle]="{'margin-top': (isVerifing | async) ? '282px' : null}" class="report-zone">
     <div class="report-header">
       <i class="material-icons">
         report
