@@ -329,6 +329,14 @@ svg#clouds {
   width: 1920px;
 }
 
+.not-found {
+  text-align: center;
+
+  img {
+    width: 60%;
+  }
+}
+
 
 /* Responsive Styles */
 @media screen and (max-width: 767px) {
@@ -424,5 +432,9 @@ svg#clouds {
     }
   }
 
-
+  .not-found {
+    img {
+      width: 100%;
+    }
+  }
 }

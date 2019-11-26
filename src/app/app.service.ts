@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
+
+  isNotFound: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { }
 
@@ -69,8 +71,9 @@ export class AppService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+      this.isNotFound.next(true);
       // TODO: send the error to remote logging infrastructure
-      console.warn(error); // log to console instead
+      console.error(error); // log to console instead
 
       // Let the app keep running by returning an empty result.
       return of(result as T);

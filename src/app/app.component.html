@@ -46,7 +46,7 @@
   </div>
 
   <!-- Suppy Chain -->
-  <div *ngIf="!(isVerifing | async)" style="display: contents;">
+  <div *ngIf="!(isVerifing | async) && !(isNotFound | async)" style="display: contents;">
     <!-- Specification -->
     <div class="batch-specification">
       <h2>Batch Specification</h2>
@@ -202,12 +202,13 @@
   </div>
 
   <!-- NOT FOUND 404 -->
-  <div>
-
+  <div *ngIf="!(isVerifing | async) && (isNotFound | async)" class="not-found">
+    <img src="./../assets/Supply chain NOT FOUND!-logo.png">
   </div>
 
   <!-- Report -->
-  <div [ngStyle]="{'margin-top': (isVerifing | async) ? '282px' : null}" class="report-zone">
+  <div [ngStyle]="{'margin-top': (isVerifing | async) ? '282px' : ((isNotFound | async) ? '141px' : null)}"
+    class="report-zone">
     <div class="report-header">
       <i class="material-icons">
         report

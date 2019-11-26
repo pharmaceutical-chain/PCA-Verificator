@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   data: BehaviorSubject<ISupplyChain> = new BehaviorSubject<ISupplyChain>({} as ISupplyChain);
   year: number = new Date().getFullYear();
   isVerifing: BehaviorSubject<boolean> = this.httpLoaderService.isLoading;
+  isNotFound = this.service.isNotFound;
 
   constructor(
     private service: AppService,
