@@ -39,7 +39,7 @@
       <img class="verificator-logo" alt="Verificator Logo" src="./../assets/logo-white.png" />
     </div>
 
-    <div *ngIf="isVerifing | async" style="display: contents;">
+    <div *ngIf="(isVerifing | async)" style="display: contents;">
       <span>Verifing Pharmaceutical Supply Chain</span>
       <img class="verificator-logo" alt="Verificator Logo" src="./../assets/search.svg" />
     </div>
@@ -215,12 +215,16 @@
       </i>
       <h2>Report</h2>
       <div class="spacer"></div>
-      <i class="material-icons button">
-        send
-      </i>
+      <div style="display: contents;">
+        <i *ngIf="!(isSendingReport | async) && !isSendingSuccess" class="material-icons button" (click)="onClickSendReport();">
+          send
+        </i>
+        <img *ngIf="(isSendingReport | async)" src="./../assets/Ripple-1s-200px.svg">
+        <i *ngIf="!(isSendingReport | async) && isSendingSuccess" class="material-icons success"> check_circle </i>
+      </div>
     </div>
-    <div class="report-content">
-      <textarea placeholder="Notify us if you detect any frauds or counterfeit pharmaceuticals"></textarea>
+    <div class="report-content" [formGroup]="reportForm">
+      <textarea formControlName="content" placeholder="Notify us if you detect any frauds or counterfeit pharmaceuticals"></textarea>
     </div>
   </div>
 

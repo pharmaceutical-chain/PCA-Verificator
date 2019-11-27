@@ -291,6 +291,14 @@ a:hover {
         cursor: pointer;
       }
     }
+
+    img {
+      height: 36px;
+    }
+
+    .success {
+      color: green;
+    }
   }
 
   .report-content {
@@ -398,7 +406,7 @@ svg#clouds {
 
     .spec-container {
       margin: 0;
-      
+
       .spec-col {
         width: 100%;
         margin: 8px 0;
