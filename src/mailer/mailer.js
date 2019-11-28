@@ -53,10 +53,10 @@ module.exports = (express) => {
       const templateCompiled = template(data);
 
       const mailOption = {
-        from: '"PharmaChain Verificator" <pharmachain.verificator@gmail.com>',
+        from: data.isEmail ? `<${data.userContact}>` : '"PharmaChain Verificator" <pharmachain.verificator@gmail.com>',
         to: '"Admin" <otis58@ethereal.email>',
         subject: `REPORT @${data.reportYear} - PharmaChain Verificator`,
-        text: `Current report URL: ${data.reportURL} \nContent: ${data.reportContent}`,
+        text: `Retailer: ${data.retailerId}\nBatch: ${data.batchId}\nUser contact: ${data.userContact}\nContent: ${data.reportContent}`,
         html: templateCompiled
       }
 

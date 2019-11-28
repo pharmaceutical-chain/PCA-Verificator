@@ -197,6 +197,31 @@
             </div>
           </ng-template>
         </div>
+
+        <!-- endnode -->
+        <div class="spec-col end-node">
+          <h3>{{endnodeData.value.type}}</h3>
+          <div class="spec-row spec-row-normal">
+            <i class="material-icons">
+              person
+            </i>
+            <span>{{endnodeData.value.tenantName}}</span>
+          </div>
+          <div class="spec-row spec-row-contract">
+            <i class="material-icons">
+              receipt
+            </i>
+            <span><a
+                (click)="onClickContracAddress(endnodeData.value.tenantCA)">{{endnodeData.value.tenantCA}}</a></span>
+          </div>
+          <div class="spec-row spec-row-normal">
+            <i class="material-icons">
+              phone
+            </i>
+            <span>{{endnodeData.value.tenantPhone}}</span>
+          </div>
+          <div class="line-left"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -207,24 +232,31 @@
   </div>
 
   <!-- Report -->
-  <div [ngStyle]="{'margin-top': (isVerifing | async) ? '282px' : ((isNotFound | async) ? '141px' : null)}"
+  <div [ngStyle]="{'margin-top': (isVerifing | async) ? '218px' : ((isNotFound | async) ? '77px' : null)}"
     class="report-zone">
     <div class="report-header">
-      <i class="material-icons">
-        report
-      </i>
-      <h2>Report</h2>
-      <div class="spacer"></div>
-      <div style="display: contents;">
-        <i *ngIf="!(isSendingReport | async) && !isSendingSuccess" class="material-icons button" (click)="onClickSendReport();">
-          send
+      <div class="title">
+        <i class="material-icons">
+          report
         </i>
-        <img *ngIf="(isSendingReport | async)" src="./../assets/Ripple-1s-200px.svg">
-        <i *ngIf="!(isSendingReport | async) && isSendingSuccess" class="material-icons success"> check_circle </i>
+        <h2>Report</h2>
+        <div class="spacer"></div>
+        <div style="display: contents;">
+          <i *ngIf="!(isSendingReport | async) && !isSendingSuccess" class="material-icons button"
+            (click)="onClickSendReport();">
+            send
+          </i>
+          <img *ngIf="(isSendingReport | async)" src="./../assets/Ripple-1s-200px.svg">
+          <i *ngIf="!(isSendingReport | async) && isSendingSuccess" class="material-icons success"> check_circle </i>
+        </div>
       </div>
+      <div class="desirce">Notify us if you detect any frauds or counterfeit pharmaceuticals</div>
     </div>
     <div class="report-content" [formGroup]="reportForm">
-      <textarea formControlName="content" placeholder="Notify us if you detect any frauds or counterfeit pharmaceuticals"></textarea>
+      <input formControlName="userContact" type="text" placeholder="Phone number or email"
+        [ngStyle]="{'border-color': reportForm.get('userContact').invalid ? 'red' : null}">
+      <textarea formControlName="content" placeholder="Report content"
+        [ngStyle]="{'border-color': reportForm.get('content').invalid ? 'red' : null}"></textarea>
     </div>
   </div>
 

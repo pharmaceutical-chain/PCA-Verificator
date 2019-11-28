@@ -17,9 +17,9 @@ interface ITransfer {
   tenantName: string;
   tenantCA: string;
   tenantPhone?: string;
-  transferTime: string;
-  transferCA: string;
-  transferQuantity: number;
-  transferUnit: string;
+  transferTime?: string;
+  transferCA?: string;
+  transferQuantity?: number;
+  transferUnit?: string;
 }
 

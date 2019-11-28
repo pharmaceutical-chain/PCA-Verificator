@@ -155,13 +155,11 @@ svg.material-icons:not(:last-child) {
     border-radius: 50%;
   }
 
-  .container-for {
-    &:last-child {
+  .end-node {
 
-      .line-left,
-      .line-right {
-        height: 100%;
-      }
+    .line-left,
+    .line-right {
+      height: 0;
     }
   }
 }
@@ -268,47 +266,58 @@ a:hover {
 }
 
 .report-zone {
-  background-color: rgb(15, 15, 16);
   position: relative;
   width: 100%;
   margin-top: 16px;
 
   .report-header {
     background-color: rgb(58, 58, 58);
-    display: flex;
     color: yellow;
-    align-items: center;
-    padding: 0 16px;
+    padding: 0 16px 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 
-    h2 {
-      margin-left: 8px;
-    }
+    .title {
+      display: flex;
+      align-items: center;
 
-    .button {
-      &:hover {
-        color: #bbbb05;
-        transform: translateX(3px);
-        cursor: pointer;
+      h2 {
+        margin-left: 8px;
+      }
+
+      .button {
+        &:hover {
+          color: #bbbb05;
+          transform: translateX(3px);
+          cursor: pointer;
+        }
+      }
+
+      img {
+        height: 36px;
+      }
+
+      .success {
+        color: green;
       }
     }
 
-    img {
-      height: 36px;
-    }
-
-    .success {
-      color: green;
+    .desirce {
+      opacity: 0.8;
     }
   }
 
   .report-content {
     width: 100%;
-    padding: 8px;
     text-align: center;
+    padding-top: 8px;
+    background-color: rgb(15, 15, 16);
 
-    textarea {
+    textarea,
+    input {
+      margin: 4px;
       width: 90%;
-      border: none;
+      border: 0.1px solid #8c8c00;
       background-color: rgb(15, 15, 16);
       color: #eee;
       font-size: 13px;
@@ -436,6 +445,14 @@ svg#clouds {
         padding: 0;
         border: none;
         margin: 0;
+      }
+
+      .end-node {
+
+        .line-left,
+        .line-right {
+          height: 100%;
+        }
       }
     }
   }
