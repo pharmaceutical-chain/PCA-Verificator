@@ -8,8 +8,8 @@ export class MailerService {
   constructor(private http: HttpClient) { }
 
   sendMail(body) {
-    // const baseUrl = 'https://pharmachain-verificator.herokuapp.com/';
-    const baseUrl = 'http://localhost:4200/';
+    const baseUrl = 'https://pharmachain-verificator.herokuapp.com/';
+    // const baseUrl = 'http://localhost:4200/';
     return this.http.post(`${baseUrl}sendreport`, body);
   }
 }
