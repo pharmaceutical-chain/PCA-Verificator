@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class MailerService {
   constructor(private http: HttpClient) { }
 
-  sendMail(body) {
+  sendMail(body: IReportMail) {
     const baseUrl = 'https://pharmachain-verificator.herokuapp.com/';
     // const baseUrl = 'http://localhost:4200/';
     return this.http.post(`${baseUrl}sendreport`, body);

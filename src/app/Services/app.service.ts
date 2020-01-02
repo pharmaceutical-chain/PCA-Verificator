@@ -70,7 +70,13 @@ export class AppService {
   }
 
   convertToLocalDate(date: Date): Date {
-    date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    const ua = navigator.userAgent.toLowerCase();
+    if (ua.indexOf('safari') !== -1) {
+      if (ua.indexOf('chrome') > -1) {
+        // Chrome
+        date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+      }
+    }
     return date;
   }
 

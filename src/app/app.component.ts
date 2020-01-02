@@ -41,16 +41,20 @@ export class AppComponent implements OnInit {
     this.retailerId = this.guidSegments[0];
     this.batchId = this.guidSegments[this.guidSegments.length - 1];
     this.service.getSupplyChain(this.retailerId, this.batchId).subscribe(res => {
-      this.endnodeData.next(res.supplyChain[res.supplyChain.length - 1]);
-      res.supplyChain.pop();
-      setTimeout(() => {
-        this.data.next(res);
-      }, 2000);
+      if (res) {
+        this.endnodeData.next(res.supplyChain[res.supplyChain.length - 1]);
+        res.supplyChain.pop();
+        setTimeout(() => {
+          this.data.next(res);
+        }, 2000);
+      } else {
+        this.isNotFound.next(true);
+      }
     });
   }
 
   onClickContracAddress(address: string) {
-    const url = `https://ropsten.etherscan.io/address/${address}#code`;
+    const url = `https://ropsten.etherscan.io/address/${address}#readContract`;
     window.open(url, '_blank');
   }
 
